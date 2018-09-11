@@ -1,0 +1,19 @@
+
+z
+Japp/src/main/java/com/example/jayasaripalli/repokotlin/model/Repository.kt,6/8/683869119495a0b6b8ea2cb3832f476e490f3072
+@
+app/build.gradle,f/4/f4a01d6a4fcb971362ec00a83903fd3902f52164
+
+Oapp/src/main/java/com/example/jayasaripalli/repokotlin/activity/MainActivity.kt,1/c/1cfb62750df341b8f345126b30bf9263837227b8
+}
+Mapp/src/main/java/com/example/jayasaripalli/repokotlin/adapter/RepoAdapter.kt,0/9/09472b4a0291dd32622a0ddd0859da2ed272d3bb
+P
+ app/src/main/AndroidManifest.xml,8/c/8c55c3ccc257e5907959013f99656e4c8ec3903e
+‚
+Rapp/src/main/java/com/example/jayasaripalli/repokotlin/service/GithubServiceApi.kt,c/e/ce29fc3e02fe590c3baac4921ae331b270f521a7
+z
+Japp/src/main/java/com/example/jayasaripalli/repokotlin/GlideImageModule.kt,2/7/276a2e04715022c044e354aa444b928be340ca71
+t
+Dapp/src/main/java/com/example/jayasaripalli/repokotlin/model/User.kt,e/7/e70d0dd13dfaf0b8cb2880609d5ec62ae099b51a
+…
+Uapp/src/main/java/com/example/jayasaripalli/repokotlin/activity/RepoDetailActivity.kt,f/5/f5599ca4f9c8eb6adba3a9a67ac683f71899bb00

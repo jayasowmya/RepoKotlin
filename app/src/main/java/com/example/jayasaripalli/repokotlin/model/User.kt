@@ -92,9 +92,9 @@ class User{
         this.avatar_url = avatar_url
     }
 
-   /* fun getAvatar_url(): String? {
+    fun getAvatar_url(): String? {
         return this.avatar_url
-    }*/
+    }
 
     fun setGravatar_id(gravatar_id: String) {
         this.gravatar_id = gravatar_id

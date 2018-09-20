@@ -17,3 +17,13 @@ t
 Dapp/src/main/java/com/example/jayasaripalli/repokotlin/model/User.kt,e/7/e70d0dd13dfaf0b8cb2880609d5ec62ae099b51a
 …
 Uapp/src/main/java/com/example/jayasaripalli/repokotlin/activity/RepoDetailActivity.kt,f/5/f5599ca4f9c8eb6adba3a9a67ac683f71899bb00
+z
+Japp/src/main/java/com/example/jayasaripalli/repokotlin/RepoListFragment.kt,e/1/e1578f5a278325b05050b9d150551d315bc0ff87
+x
+Happ/src/main/java/com/example/jayasaripalli/repokotlin/DetailFragment.kt,b/f/bffb5c73c4a93be3f40423a15cea7e0fa6113912
+…
+Uapp/src/main/java/com/example/jayasaripalli/repokotlin/activity/ItemDetailFragment.kt,f/6/f6ef833d294cd83272984ab89fb5b1c84d42d4dd
+…
+Uapp/src/main/java/com/example/jayasaripalli/repokotlin/activity/ItemDetailActivity.kt,3/2/322c8432019aa23eb81d08323e79a0455d6f02e5
+ƒ
+Sapp/src/main/java/com/example/jayasaripalli/repokotlin/activity/ItemListActivity.kt,7/3/73801bab927e7f8d2ae45ac4b64b96e553f92f50

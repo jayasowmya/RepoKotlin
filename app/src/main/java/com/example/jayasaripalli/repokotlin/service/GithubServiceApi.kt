@@ -7,8 +7,8 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface GithubServiceApi {
-    @get:GET("repositories")
-    val repositories: Call<List<Repository>>
+    /*@get:GET("repositories")
+    val repositories: Call<List<Repository>>*/
 
     @GET("users/{user}/repos")
     fun listRepos(@Path("user") user: String?): Call<List<Repository>>

@@ -1,19 +1,15 @@
 package com.example.jayasaripalli.repokotlin.activity
 
-import android.support.v7.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
-import android.support.v7.widget.DividerItemDecoration
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.util.Log
+import android.support.v7.app.AppCompatActivity
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.example.jayasaripalli.repokotlin.R
-import com.example.jayasaripalli.repokotlin.adapter.RepoAdapter
-import com.example.jayasaripalli.repokotlin.model.Repository
+import com.example.jayasaripalli.repokotlin.RepoListFragment
 import com.example.jayasaripalli.repokotlin.model.User
 import com.example.jayasaripalli.repokotlin.service.GithubServiceApi
 import retrofit2.Call
@@ -21,41 +17,31 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.text.MessageFormat
-import java.util.*
 
 class RepoDetailActivity : AppCompatActivity() {
 
-    private val TAG = "RepoDetailActivity"
-    private var repoList: RecyclerView? = null
-    private var uName: String? = null
+    private var mTwoPane: Boolean = false
+    private lateinit var uName: String
     private var retrofit: Retrofit? = null
-    private var profileImg: ImageView? = null
-    private var repoNum: TextView? = null
+    private lateinit var profileImg: ImageView
+    private lateinit var repoNum: TextView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        setContentView(R.layout.activity_repo_detail)
         val bundle = intent.extras
         if (bundle != null) {
             uName = bundle.getString("username")
-        } else {
-            Log.e("Bundle not passed from requested activity", "RepoDetailActivity")
         }
-        setContentView(R.layout.activity_repo_detail)
-        repoList = findViewById(R.id.list_repo)
+        if (findViewById<View>(R.id.item_detail_container) != null) {
+            // The detail container view will be present only in the
+            // large-screen layouts (res/values-w900dp).
+            // If this view is present, then the
+            // activity should be in two-pane mode.
+            mTwoPane = true
+        }
         profileImg = findViewById(R.id.profile_img)
         repoNum = findViewById(R.id.numberRepos)
-
-        repoList!!.setHasFixedSize(true)
-        val layoutManager = LinearLayoutManager(this)
-        repoList!!.layoutManager = layoutManager
-        val dividerItemDecoration = DividerItemDecoration(repoList!!.context,
-                layoutManager.orientation)
-        repoList!!.addItemDecoration(dividerItemDecoration)
-
-        if (uName != null) {
-            connectAndGetApiData()
-        }
+        connectAndGetApiData()
     }
 
     private fun connectAndGetApiData() {
@@ -65,7 +51,7 @@ class RepoDetailActivity : AppCompatActivity() {
                     .addConverterFactory(GsonConverterFactory.create())
                     .build()
         }
-        val githubApiService = retrofit!!.create<GithubServiceApi>(GithubServiceApi::class.java)
+        val githubApiService = retrofit!!.create(GithubServiceApi::class.java)
         val userCall = githubApiService.getUser(uName)
         userCall.enqueue(object : Callback<User> {
             override fun onResponse(call: Call<User>, response: Response<User>) {
@@ -77,45 +63,37 @@ class RepoDetailActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<User>, t: Throwable) {
-                //showAlert(t.message)
+                t.message?.let { showAlert(it) }
 
             }
         })
-        val listRepocall = githubApiService.listRepos(uName)
-        listRepocall.enqueue(object : Callback<List<Repository>> {
-            override fun onResponse(call: Call<List<Repository>>, response: Response<List<Repository>>) {
-                if (response.code() == 200) {
-                    handleResult(response)
-                } else {
-                    showAlert(response.message())
-                }
-            }
-
-            override fun onFailure(call: Call<List<Repository>>, throwable: Throwable) {
-                //showAlert(throwable.message)
-            }
-        })
-    }
-
-    private fun handleResult(response: Response<List<Repository>>) {
-        val repositoryList = ArrayList<Repository>()
-        assert(response.body() != null)
-        response.body()?.let {
-            for (repo in it ) {
-                repositoryList.add(repo)
-            }
-        }
-        repoList?.adapter = RepoAdapter(repositoryList, R.layout.list_item, applicationContext)
     }
 
     private fun loadImage(response: Response<User>?) {
         if (response?.body() != null) {
-            profileImg?.let {
-                    Glide.with(this)
-                            .load(response.body()?.getAvatar_url())
-                            .into(it)
+            profileImg.let {
+                Glide.with(this)
+                        .load(response.body()!!.getAvatar_url())
+                        .into(it)
             }
-            repoNum?.text = "the number of public repositories are" + response.body()?.getPublic_repos()
+            repoNum.text = "the number of public repositories are:" + response.body()!!.getPublic_repos()
+            profileImg.setOnClickListener { view ->
+                if (mTwoPane) {
+                    val arguments = Bundle()
+                    arguments.putString("username", uName)
+                    val fragment = RepoListFragment()
+                    fragment.arguments = arguments
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.item_detail_container, fragment)
+                            .commit()
+                } else {
+                    val context = view.context
+                    val intent = Intent(context, RepoListActivity::class.java)
+                    intent.putExtra("username", uName)
+
+                    context.startActivity(intent)
+                }
+            }
         }
     }
 

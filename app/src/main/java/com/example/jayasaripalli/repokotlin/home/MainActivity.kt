@@ -1,4 +1,4 @@
-package com.example.jayasaripalli.repokotlin.activity
+package com.example.jayasaripalli.repokotlin.home
 
 import android.app.Activity
 import android.content.Intent
@@ -8,6 +8,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import com.example.jayasaripalli.repokotlin.R
+import com.example.jayasaripalli.repokotlin.repolist.ui.RepoItemListActivity
 
 class MainActivity : AppCompatActivity() {
     private lateinit var username: EditText
@@ -24,7 +25,7 @@ class MainActivity : AppCompatActivity() {
         submitBtn.setOnClickListener {
             hideSoftKeyboard()
             uName = username.text.toString()
-            val intent = Intent(this, RepoDetailActivity::class.java)
+            val intent = Intent(this, RepoItemListActivity::class.java)
             intent.putExtra("username", uName)
             startActivity(intent)
         }

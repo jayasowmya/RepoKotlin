@@ -1,7 +1,7 @@
 package com.example.jayasaripalli.repokotlin.service
 
-import com.example.jayasaripalli.repokotlin.model.Repository
-import com.example.jayasaripalli.repokotlin.model.User
+import com.example.jayasaripalli.repokotlin.repolist.model.Repository
+import com.example.jayasaripalli.repokotlin.detail.model.User
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path

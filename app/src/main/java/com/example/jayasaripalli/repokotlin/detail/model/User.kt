@@ -1,4 +1,4 @@
-package com.example.jayasaripalli.repokotlin.model
+package com.example.jayasaripalli.repokotlin.detail.model
 
 class User{
 
